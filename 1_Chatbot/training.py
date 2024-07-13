@@ -11,24 +11,30 @@ lemmatizer = WordNetLemmatizer()
 
 intents = json.loads(open('intents.json').read())
 
+# Initialize lists for words, classes, and documents
 words = []
 classes = []
 documents = []
 ignoreLetters = ['?', '!', '.', ',']
 
+# This loop iterates over each intent dictionary within the intents list. 
+# Each intent dictionary represents a different category of user input.
 for intent in intents['intents']:
     for pattern in intent['patterns']:
-        wordList = nltk.word_tokenize(pattern)
-        words.extend(wordList)
-        documents.append((wordList, intent['tag']))
-        if intent['tag'] not in classes:
-            classes.append(intent['tag'])
+        wordList = nltk.word_tokenize(pattern)  # tokenize each pattern
+        words.extend(wordList)  # add each tokenized word to the words list
+        documents.append((wordList, intent['tag']))  # add each pattern and corresponding tag to the documents list
+        if intent['tag'] not in classes:        # add each unique tag to the classes list
+            classes.append(intent['tag'])   
 
+# Lemmatize words and remove duplicates
 words = [lemmatizer.lemmatize(word) for word in words if word not in ignoreLetters]
-words = sorted(set(words))
 
+# Sort words and classes
+words = sorted(set(words))
 classes = sorted(set(classes))
 
+# Save words and classes to pickle files (optional)
 pickle.dump(words, open('words.pkl', 'wb'))
 pickle.dump(classes, open('classes.pkl', 'wb'))
 
