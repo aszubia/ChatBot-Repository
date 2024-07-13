@@ -19,4 +19,4 @@ Here's a brief overview of the chatbot projects currently in this repository:
 * **Project 1: Simple Chatbot**
    - A basic chatbot designed to respond to specific keywords or phrases with predefined replies.
    - Serves as an introductory project to illustrate the core concept of chatbot interactions.
-   - Found in the `1_chatbot` directory.
+   - Found in the `1_Chatbot` directory.
